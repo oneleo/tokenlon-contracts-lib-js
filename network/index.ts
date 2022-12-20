@@ -1,5 +1,6 @@
 export enum Network {
     Mainnet = 1,
+    Goerli = 5,
     Arbitrum = 42161,
 }
 
@@ -28,6 +29,7 @@ export type Addresses = {
     AMMWrapperWithPath: string
     LimitOrder: string
     RFQ: string
+    L2Deposit: string
     UserProxy: string
 
     // Uniswap

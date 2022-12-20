@@ -9,6 +9,7 @@ import {
     LimitOrderFillByProtocolData,
     LimitOrderFillByTraderData,
     RFQFillData,
+    L2DepositData,
 } from "./types"
 
 export class EncodingHelper {
@@ -157,6 +158,28 @@ export class EncodingHelper {
             ],
             data.makerSignature,
             data.takerSignature,
+        ])
+    }
+
+    /* L2Deposit */
+
+    public encodeL2Deposit(data: L2DepositData): string {
+        const i = new ethers.utils.Interface(abi.L2Deposit)
+        return i.encodeFunctionData("deposit", [
+            [
+                [
+                    data.deposit.l2Identifier,
+                    data.deposit.l1TokenAddr,
+                    data.deposit.l2TokenAddr,
+                    data.deposit.sender,
+                    data.deposit.recipient,
+                    data.deposit.amount,
+                    data.deposit.salt,
+                    data.deposit.expiry,
+                    data.deposit.data,
+                ],
+                data.depositSig,
+            ],
         ])
     }
 

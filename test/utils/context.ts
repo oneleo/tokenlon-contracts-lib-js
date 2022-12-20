@@ -9,6 +9,7 @@ import {
     IAMMWrapperWithPath,
     ILimitOrder,
     IRFQ,
+    IL2Deposit,
     IUserProxy,
     IERC20,
     IUniswapV2Router,
@@ -34,6 +35,7 @@ export type Context = {
         AMMWrapperWithPath: IAMMWrapperWithPath
         LimitOrder: ILimitOrder
         RFQ: IRFQ
+        L2Deposit: IL2Deposit
         UserProxy: IUserProxy
     }
     uniswap: {
@@ -76,6 +78,7 @@ async function setupContext(): Promise<Context> {
             ),
             LimitOrder: await ethers.getContractAt("ILimitOrder", addresses.LimitOrder),
             RFQ: await ethers.getContractAt("IRFQ", addresses.RFQ),
+            L2Deposit: await ethers.getContractAt("IL2Deposit", addresses.L2Deposit),
             UserProxy: await ethers.getContractAt("IUserProxy", addresses.UserProxy),
         },
         uniswap: {

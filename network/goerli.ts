@@ -6,13 +6,13 @@ export default {
     WETH: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
 
     // Tokenlon
-    AllowanceTarget: "0x8A42d311D282Bfcaa5133b2DE0a8bCDBECea3073",
-    AMMWrapper: "0x4a14347083B80E5216cA31350a2D21702aC3650d",
-    AMMWrapperWithPath: "0x4a14347083B80E5216cA31350a2D21702aC3650d",
+    AllowanceTarget: "",
+    AMMWrapper: "",
+    AMMWrapperWithPath: "",
     LimitOrder: "",
-    RFQ: "0xfD6C2d2499b1331101726A8AC68CCc9Da3fAB54F",
+    RFQ: "",
     L2Deposit: "",
-    UserProxy: "0x03f34bE1BF910116595dB1b11E9d1B2cA5D59659",
+    UserProxy: "",
 
     // Uniswap
     UniswapV2Router: "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
