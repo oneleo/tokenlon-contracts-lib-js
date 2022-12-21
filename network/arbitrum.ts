@@ -24,4 +24,8 @@ export default {
 
     // Curve
     Curve3Pool: "",
+
+    // L2 Bridge
+    ArbitrumL1GatewayRouter: "",
+    OptimismL1StandardBridge: "",
 }
