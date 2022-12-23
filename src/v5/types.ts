@@ -159,7 +159,7 @@ export type RFQFillData = {
     takerSignature: BytesLike
 }
 
-/* L2Deposit */
+/* L2 Deposit */
 
 export type L2Deposit = {
     l2Identifier: number

@@ -232,7 +232,7 @@ export class SigningHelper extends BaseSigningHelper {
         return this.signEIP712(this.getRFQFillEIP712Types(), fill, options)
     }
 
-    /* L2Deposit */
+    /* L2 Deposit */
 
     public getL2DepositEIP712Types(): EIP712Types {
         return {

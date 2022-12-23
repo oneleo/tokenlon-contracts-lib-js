@@ -161,7 +161,7 @@ export class EncodingHelper {
         ])
     }
 
-    /* L2Deposit */
+    /* L2 Deposit */
 
     // To comply with: https://github.com/consenlabs/tokenlon-contracts/blob/master/contracts/interfaces/IL2Deposit.sol#L29-L36
     public encodeL2Deposit(data: L2DepositData): string {
