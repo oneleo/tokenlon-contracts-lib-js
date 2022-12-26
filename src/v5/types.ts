@@ -177,3 +177,13 @@ export type L2DepositData = {
     deposit: L2Deposit
     depositSig: BytesLike
 }
+
+export type L2ArbitrumDepositData = {
+    maxSubmissionCost: BigNumberish
+    maxGas: BigNumberish
+    gasPriceBid: BigNumberish
+}
+
+export type L2OptimismDepositData = {
+    l2Gas: BigNumberish
+}

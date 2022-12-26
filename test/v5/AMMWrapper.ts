@@ -58,9 +58,6 @@ if (isNetwork(Network.Mainnet)) {
             const tx = await tokenlon.UserProxy.connect(wallet.user).toAMM(payload)
             const receipt = await tx.wait()
 
-            console.log("receipt:", receipt)
-            console.log("payload:", payload)
-
             assertSwapped(receipt, order)
         })
 

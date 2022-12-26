@@ -10,6 +10,8 @@ import {
     LimitOrderFillByTraderData,
     RFQFillData,
     L2DepositData,
+    L2ArbitrumDepositData,
+    L2OptimismDepositData,
 } from "./types"
 
 export class EncodingHelper {
@@ -182,6 +184,17 @@ export class EncodingHelper {
                 data.depositSig,
             ],
         ])
+    }
+
+    public encodeL2ArbitrumDepositData(user: string, data: L2ArbitrumDepositData) {
+        return ethers.utils.defaultAbiCoder.encode(
+            ["address", "uint256", "uint256", "uint256"],
+            [user, data.maxSubmissionCost, data.maxGas, data.gasPriceBid],
+        )
+    }
+
+    public encodeL2OptimismDepositData(data: L2OptimismDepositData) {
+        return ethers.utils.defaultAbiCoder.encode(["uint32"], [data.l2Gas])
     }
 
     /* Vendor */
