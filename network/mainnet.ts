@@ -28,4 +28,9 @@ export default {
     // L2 Bridge
     ArbitrumL1GatewayRouter: "",
     OptimismL1StandardBridge: "",
+
+    // L2 Token
+    DAIForArbitrumBridge: "",
+    USDCForArbitrumBridge: "",
+    USDTForArbitrumBridge: "",
 }

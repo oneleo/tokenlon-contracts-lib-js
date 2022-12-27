@@ -21,25 +21,15 @@ enum L2Identifier {
     Optimism,
 }
 
-const DAIOptimism = "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1"
-const USDCOptimism = "0x7F5c764cBc14f9669B88837ca1490cCa17c31607"
-const USDTOptimism = "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58"
-
-// const DAIArbitrum = "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1"
-const DAIArbitrum = "0x8411120Df646D6c6DA15193Ebe9E436c1c3a5222"
-//const USDCArbitrum = "0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8"
-const USDCArbitrum = "0x8FB1E3fC51F3b789dED7557E680551d93Ea9d892"
-//const USDTArbitrum = "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9"
-const USDTArbitrum = "0xB401e876346B3C77DD51781Efba5223d2F1e6697"
-
+const zeroAddress = "0x" + "0".repeat(40)
 const isArbitrum = false
 
 if (isNetwork(Network.Goerli)) {
     contextSuite("L2Deposit", ({ wallet, network, token, tokenlon, uniswap }) => {
         const defaultDeposit: L2Deposit = {
-            l2Identifier: L2Identifier.Arbitrum,
-            l1TokenAddr: token.DAI.address,
-            l2TokenAddr: DAIArbitrum,
+            l2Identifier: 0,
+            l1TokenAddr: zeroAddress,
+            l2TokenAddr: zeroAddress,
             sender: wallet.user.address,
             recipient: wallet.user.address,
             amount: 100,
@@ -59,18 +49,22 @@ if (isNetwork(Network.Goerli)) {
 
             const deposit = isArbitrum
                 ? {
+                      // For Arbitrum bridge
                       ...defaultDeposit,
+                      l1TokenAddr: token.USDT.address,
                       l2Identifier: L2Identifier.Arbitrum,
-                      l2TokenAddr: DAIArbitrum,
+                      l2TokenAddr: token.USDTForArbitrumBridge.address,
                       data: encodingHelper.encodeL2ArbitrumDepositData(
                           wallet.user.address,
                           arbitrumGasData,
                       ),
                   }
                 : {
+                      // For Optimism bridge
                       ...defaultDeposit,
+                      l1TokenAddr: token.DAI.address,
                       l2Identifier: L2Identifier.Optimism,
-                      l2TokenAddr: DAIOptimism,
+                      l2TokenAddr: zeroAddress, // It does not matter for Optimism bridge
                       data: encodingHelper.encodeL2OptimismDepositData(optimismGasData),
                   }
             console.log("DAI balance before:", await token.DAI.balanceOf(wallet.user.address))
@@ -79,7 +73,7 @@ if (isNetwork(Network.Goerli)) {
                 wallet.user,
                 tokenlon.AllowanceTarget,
                 deposit.l1TokenAddr,
-                "100000000000000000000000000",
+                defaultDeposit.amount,
             )
             console.log("DAI balance after:", await token.DAI.balanceOf(wallet.user.address))
             console.log(await wallet.user.getBalance())
@@ -125,13 +119,8 @@ if (isNetwork(Network.Goerli)) {
 
         function assertEvent(receipt: ContractReceipt, deposit: L2Deposit) {
             console.log("Test Point E")
-            // const [
-            //     {
-            //         args: [, depositLog],
-            //     },
-            // ] = parseLogsByName(tokenlon.L2Deposit, "Deposited", receipt.logs)
             const [{ args }] = parseLogsByName(tokenlon.L2Deposit, "Deposited", receipt.logs)
-            console.log("out:", args)
+            console.log("args:", args)
             console.log("Test Point F")
             // Verify deposit
             expect(args.l2Identifier).to.equal(deposit.l2Identifier)
@@ -149,7 +138,6 @@ if (isNetwork(Network.Goerli)) {
             if (deposit.l2Identifier === L2Identifier.Optimism) {
                 expect(args.bridgeResponse).to.equal("0x")
             }
-            // expect(args.bridgeResponse).to.equal("0x")
             console.log("Test Point G")
         }
     })

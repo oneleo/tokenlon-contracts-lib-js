@@ -42,6 +42,15 @@ export type Addresses = {
 
     // Curve
     Curve3Pool: string
+
+    // L2 Bridge
+    ArbitrumL1GatewayRouter: string
+    OptimismL1StandardBridge: string
+
+    // L2 Token
+    DAIForArbitrumBridge: string
+    USDCForArbitrumBridge: string
+    USDTForArbitrumBridge: string
 }
 
 export const addresses = require(`./${Network[network].toLowerCase()}.ts`).default as Addresses
