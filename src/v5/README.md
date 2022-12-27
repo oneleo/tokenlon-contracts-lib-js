@@ -2,11 +2,13 @@
 
 Tokenlon `v5` library supports the following Tokenlon strategy contracts:
 
--   Mainnet
+-   Mainnet:
     -   AMM
     -   RFQ
 -   Arbitrum:
     -   Limit Order
+-   Goerli:
+    -   L2 Deposit
 
 > Addresses of Tokenlon strategy contracts can be found in [tokenlon-contracts](https://github.com/consenlabs/tokenlon-contracts).
 
@@ -233,6 +235,10 @@ interface EncodingHelper {
     /* RFQ */
 
     encodeRFQFill(data: RFQFillData): string
+
+    /* L2 Deposit */
+
+    encodeL2Deposit(data: L2DepositData): string
 
     /* Vendor */
 
